@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
+import dotenv from 'dotenv';
+dotenv.config();
 
-const MONGO_URL = 'mongodb+srv://divyankh444:8WHTMSTcKQDpIjGo@cluster0.ymjmmnx.mongodb.net/Paynzer'
+const MONGO_URL = process.env.MONGO_URI as string;
+
 
 const connectDB = async (): Promise<void> => {
   try {

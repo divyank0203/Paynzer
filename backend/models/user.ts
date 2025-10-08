@@ -9,11 +9,11 @@ export interface IUser extends mongoose.Document{
     updatedAt: Date;
 }
 
-const UserSchema = new Schema<IUser>({
-    firstname: { type: String, required: true},
-    lastname: { type: String, required: false},
+const UserSchema = new mongoose.Schema<IUser>({
+    firstname: { type: String, required: true, trim: true, maxLength: 25},
+    lastname: { type: String, required: false, trim: true, maxLength: 35},
     email: { type: String, required: true, unique: true},
-    password: { type: String, required: true, minLength: 8},
+    password: { type: String, required: true, minLength: 6},
 
 },
 {
