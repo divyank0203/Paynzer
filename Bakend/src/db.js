@@ -15,7 +15,7 @@ const ConnectDB = async function(){
 }
 
 const UserSchema = new mongoose.Schema({
-    username: {type: String, required: true, unique: true, minLength: 4},
+    username: {type: String, required: true, unique: true, minLength: 4, lowercase: true},
     password: {type: String, required: true, minLength: 8},
     firstName: {type: String, required: true, minLength: 2, maxLength: 50},
     lastName: {type: String, required: false, minLength: 2, maxLength: 50},
