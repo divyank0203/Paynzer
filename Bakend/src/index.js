@@ -1,15 +1,34 @@
+
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
+
+
 import mongoose from "mongoose";
 import cors from "cors";
 import router from "./routes/index.js";
-import dotenv from "dotenv";
+
 const app = express();
-import User from "./db.js";
-import { ConnectDB } from "./db.js";
+import User, { ConnectDB } from "./db.js";
 
-dotenv.config();
 
-ConnectDB();
+
+
+
+const startServer = async function(){
+    try{
+        await ConnectDB();
+        console.log("Database connected");
+
+        app.listen(5000, () => {
+            console.log("Server is running on port 5000");
+        });
+    }catch(error){
+        console.log(error);
+
+    }
+}
 
 const corsOptions = {
   origin: 'http://localhost:5173/', 
@@ -23,11 +42,9 @@ app.use(cors(corsOptions));
 
 app.use("/api/v1", router);
 
-app.get('/', function(req, res, next){
+app.get('/', function(req, res){
     res.send("Hello World!");
-    next();
+   
 })
 
-app.listen(5000, () => {
-    console.log("Server is running on port 5000");
-});
+startServer();
